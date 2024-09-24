@@ -1,0 +1,58 @@
+<!--
+    * v-bind: vincular dinamicamente o atributo html a expressões JS. A abreviação é :,
+    * v-on: diretiva usada para escutar eventos do DOM e executar métodos ou expressões JavaScript em resposta a esses eventos. A abreviação é @.
+    * v-model:  cria uma ligação bidirecional entre um valor de dados e um elemento de input, como <input>, <textarea>, ou <select>.
+        Ele é amplamente usado para formular entradas em que o valor inserido pelo usuário precisa ser automaticamente sincronizado com 
+        a variável correspondente no componente Vue, e vice-versa. 
+    * template:  usada para definir um bloco de HTML que serve como um layout ou estrutura reutilizável, mas que não renderiza nenhum 
+        elemento visível no DOM. O <template> é frequentemente utilizado com diretivas como v-if, v-for, etc., para encapsular múltiplos 
+        elementos sem adicionar um contêiner extra no DOM.
+-->
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>To-Do List</title>
+</head>
+
+<body>
+
+    <main id="app">
+        <section class="todo-list">
+            <h3>Lista de Tarefas</h3>
+
+            <div class="all-todos">
+                <div v-for="task in tasks" class="single-todo" :class="{done: task.done}"
+                    @click="task.done = !task.done; storeTasks()">
+                    <p>{{task.description}}</p>
+                </div>
+            </div>
+
+            <button class="clear" @click="tasks=[]; storeTasks()" v-if="tasks.length">Limpar tudo</button>
+
+            <input type="text" placeholder="Escreva uma nova tarefa..." v-model="newTask.description">
+            <button class="add" @click="addTask(); storeTasks()">Adicionar</button>
+
+            <div class="instructions">
+                Instruções:
+                <ul>
+                    <li>Clique no texto da tarefa para alternar entre feita / não feita</li>
+                    <li>Use o botão limpar tudo para remover todas as tarefas</li>
+                    <li>Use o input para adicionar novas tarefas</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</body>
+<script src="scripts.js"></script>
+</body>
+
+</html>
